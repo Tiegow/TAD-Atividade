@@ -31,6 +31,7 @@ int main()
         cout << "   |3 - Adicionar astronauta em voo" << endl;
         cout << "   |4 - Remover astronauta do voo" << endl;
         cout << "   |5 - Lancar um voo" << endl;
+        cout << "   |6 - Explodir um voo (!!!)" << endl;
         cout << "   |9 - Listar voos" << endl;
         cout << "   |0 - Fechar painel de controle" << endl;
         cin >> painel;
@@ -51,6 +52,9 @@ int main()
             break;
         case 5:
             voo_lancar(meus_voos, meus_astronautas);
+            break;
+        case 6:
+            voo_explodir(meus_voos, meus_astronautas);
             break;
         case 9:
             // listar_voos(meus_voos);

@@ -184,9 +184,10 @@ void voo_lancar(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
             }
             meus_voos.at(i).setSit("curso");
             cout << "Voo lancado!" << endl;
+            return;
         }
-        return;
     }
+    cout << "Voo de codigo " << codigo << " nao encontrado" << endl;
 }
 
 void voo_explodir(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
@@ -203,22 +204,21 @@ void voo_explodir(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
     cout << "Codigo do voo: " << endl;
     cin >> codigo;
 
-    for(int i = 0; i < meus_voos.size(); i++)
+    for(int i_voo = 0; i_voo < meus_voos.size(); i_voo++) //Busca o voo do codigo informado
     {
-        if(meus_voos.at(i).getCod() == codigo)
+        if(meus_voos.at(i_voo).getCod() == codigo)
         {
-            if(meus_voos.at(i).getSit() == "curso")
+            if(meus_voos.at(i_voo).getSit() == "curso") //Voo so pode ser destruido em curso
             {
-                for(int ls = 0; ls < meus_voos.at(i).lista_passageiros.size(); ls++)
+                for(int i_pasg = 0; i_pasg < meus_voos.at(i_voo).lista_passageiros.size(); i_pasg++) //Altera o estado dos passageiros no voo
                 {
-                    meus_voos.at(i).lista_passageiros[ls]->setDisp("deceased");
-                    meus_voos.at(i).setSit("destruido");
-
-                    cout << "Voo destruido!" << endl;
+                    meus_voos.at(i_voo).lista_passageiros[i_pasg]->setDisp("deceased");
                 }   
+                meus_voos.at(i_voo).setSit("destruido"); //Altera o estado do voo
+                cout << "Voo destruido!" << endl;
                 return;
             }
-            else
+            else 
             {
                 cout << "O voo nao esta em curso. Encerrando sequencia de explosao" << endl;
                 return;
