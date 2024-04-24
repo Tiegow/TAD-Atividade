@@ -1,16 +1,16 @@
 #include "voo.h"
 #include "funcoes.h"
 
-void teste(vector<voo>* meus_voos, vector<astronauta>* meus_astronautas)
+void teste(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
 {
-    for(int i = 0; i < meus_voos->size(); i++)
+    for(int i = 0; i < meus_voos.size(); i++)
     {
-        cout << "Voo " << meus_voos->at(i).getCod() << ":" << endl;
+        cout << "Voo " << meus_voos.at(i).getCod() << ":" << endl;
 
-        for(int j = 0; j < meus_voos->at(i).lista_passageiros.size(); j++)
+        for(int j = 0; j < meus_voos.at(i).lista_passageiros.size(); j++)
         {
-            cout << "Astronauta: " << meus_voos->at(i).lista_passageiros[j]->getNome() << endl;
-            cout << "Situacao: " << meus_voos->at(i).lista_passageiros[j]->getDisp() << endl;
+            cout << "Astronauta: " << meus_voos.at(i).lista_passageiros[j]->getNome() << endl;
+            cout << "Situacao: " << meus_voos.at(i).lista_passageiros[j]->getDisp() << endl;
         }
     }
 }
@@ -38,23 +38,23 @@ int main()
         switch (painel)
         {
         case 1:
-            cadastrar_astronauta(&meus_astronautas);
+            cadastrar_astronauta(meus_astronautas);
             break;
         case 2:
-            cadastrar_voo(&meus_voos);
+            cadastrar_voo(meus_voos);
             break;
         case 3:
-            voo_addAstro(&meus_voos, &meus_astronautas);
+            voo_addAstro(meus_voos, meus_astronautas);
             break;
         case 4:
-            voo_remAstro(&meus_voos);
+            voo_remAstro(meus_voos);
             break;
         case 5:
-            voo_lancar(&meus_voos, &meus_astronautas);
+            voo_lancar(meus_voos, meus_astronautas);
             break;
         case 9:
-            // listar_voos(&meus_voos);
-            teste(&meus_voos, &meus_astronautas);
+            // listar_voos(meus_voos);
+            teste(meus_voos, meus_astronautas);
             break;
         default:
             break;
@@ -65,5 +65,4 @@ int main()
     return 0;
 }
 
-//g++ -o astro main.cpp astronauta.cpp voo.cpp -I .\include
-//g++ -o astro main.cpp astronauta.cpp voo.cpp -I .\include
+//g++ -o astro main.cpp funcoes.cpp astronauta.cpp voo.cpp -I .\include

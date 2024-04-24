@@ -20,7 +20,7 @@ class voo
         string getSit();
         void setSit(string sit);
 
-        void add_astronauta(string cpf, vector<astronauta>* lista);
+        void add_astronauta(string cpf, vector<astronauta> &lista);
         void rem_astronauta(string cpf);
 };
 

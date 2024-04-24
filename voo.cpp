@@ -32,18 +32,31 @@ void voo::setSit(string sit)
     situacao = sit;
 }
 
-void voo::add_astronauta(string cpf, vector<astronauta>* lista)
+void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
 {
-    for(int i = 0; i < lista->size(); i++)
+    int index_passageiro = -1;
+
+    for(int i = 0; i < lista_astros.size(); i++) //Verifica qual o passageiro que quer cadastrar
     {
-        if(lista->at(i).getCPF() == cpf)
+        if(lista_astros.at(i).getCPF() == cpf) index_passageiro = i;
+    }
+    if(index_passageiro == -1)
+    {
+        cout << "Astronauta nao encontrado." << endl;
+        return;
+    }
+
+    for(int j = 0; j < lista_passageiros.size(); j++) //Verifica se o passageiro ja esta no voo
+    {
+        if(lista_passageiros.at(j)->getCPF() == lista_astros.at(index_passageiro).getCPF())
         {
-            lista_passageiros.push_back(&lista->at(i));
-            cout << "Astronauta " << lista->at(i).getNome() << " adicionado ao voo " << codigo << endl;
+            cout << "Passageiro ja cadastrado no voo." << endl;
             return;
         }
     }
-    cout << "Astronauta nao encontrado." << endl;
+
+    lista_passageiros.push_back(&lista_astros.at(index_passageiro)); //Adiciona passageiro
+    cout << "Astronauta " << lista_astros.at(index_passageiro).getNome() << " adicionado ao voo " << codigo << endl;
 }
 
 void voo::rem_astronauta(string cpf)
