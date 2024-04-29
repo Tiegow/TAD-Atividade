@@ -2,7 +2,6 @@
 #define VOO_H
 
 #include "astronauta.h"
-#include <vector>
 
 class voo
 {
