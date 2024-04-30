@@ -34,21 +34,20 @@ void voo::setSit(string sit)
 
 void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
 {
-
-    for(int i = 0; i < lista_astros.size(); i++) //Verifica qual o passageiro que quer cadastrar
+    for(int i = 0; i < lista_astros.size(); i++) //Procura qual o passageiro que quer cadastrar
     {
         if(lista_astros.at(i).getCPF() == cpf)
         {
-            for(int j = 0; j < lista_passageiros.size(); j++) //Verifica se o passageiro ja esta no voo
+            if(lista_astros.at(i).getDisp() == "pndisp") //Verifica se o astronauta esta morto
             {
-                if(lista_passageiros.at(j)->getCPF() == lista_astros.at(i).getCPF())
+                cout << "Astronauta esta permanentemente indisponivel." << endl;
+                return;
+            }
+            for(int j = 0; j < lista_passageiros.size(); j++) 
+            {
+                if(lista_passageiros.at(j)->getCPF() == lista_astros.at(i).getCPF()) //Verifica se o passageiro ja esta no voo
                 {
                     cout << "Passageiro ja cadastrado no voo." << endl;
-                    return;
-                }
-                if(lista_passageiros.at(j)->getDisp() == "pndisp")
-                {
-                    cout << "Passageiro esta permanentemente indisponivel." << endl;
                     return;
                 }
             }
