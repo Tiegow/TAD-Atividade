@@ -2,7 +2,6 @@
 #define VOO_H
 
 #include "astronauta.h"
-#include <vector>
 
 class voo
 {
@@ -22,6 +21,9 @@ class voo
 
         void add_astronauta(string cpf, vector<astronauta> &lista);
         void rem_astronauta(string cpf);
+        void lancar();
+        void explodir(vector<astronauta*> &R_I_P);
+        void finalizar();
 };
 
 #endif

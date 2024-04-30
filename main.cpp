@@ -1,23 +1,10 @@
 #include "voo.h"
 #include "funcoes.h"
 
-void teste(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
-{
-    for(int i = 0; i < meus_voos.size(); i++)
-    {
-        cout << "Voo " << meus_voos.at(i).getCod() << ":" << endl;
-
-        for(int j = 0; j < meus_voos.at(i).lista_passageiros.size(); j++)
-        {
-            cout << "Astronauta: " << meus_voos.at(i).lista_passageiros[j]->getNome() << endl;
-            cout << "Situacao: " << meus_voos.at(i).lista_passageiros[j]->getDisp() << endl;
-        }
-    }
-}
-
 int main()
 {   
     vector<astronauta> meus_astronautas;
+    vector<astronauta*> R_I_P;
     vector<voo> meus_voos;
 
     int painel;
@@ -32,7 +19,9 @@ int main()
         cout << "   |4 - Remover astronauta do voo" << endl;
         cout << "   |5 - Lancar um voo" << endl;
         cout << "   |6 - Explodir um voo (!!!)" << endl;
-        cout << "   |9 - Listar voos" << endl;
+        cout << "   |7 - Finalizar um voo" << endl;
+        cout << "   |8 - Listar voos" << endl;
+        cout << "   |9 - Listar fatalidades" << endl;
         cout << "   |0 - Fechar painel de controle" << endl;
         cin >> painel;
 
@@ -51,20 +40,26 @@ int main()
             voo_remAstro(meus_voos);
             break;
         case 5:
-            voo_lancar(meus_voos, meus_astronautas);
+            voo_lancar(meus_voos);
             break;
         case 6:
-            voo_explodir(meus_voos, meus_astronautas);
+            voo_explodir(meus_voos, R_I_P);
+            break;
+        case 7:
+            voo_fim(meus_voos);
+            break;
+        case 8:
+            listar_voos(meus_voos);
             break;
         case 9:
-            // listar_voos(meus_voos);
-            teste(meus_voos, meus_astronautas);
+            listar_mortos(R_I_P);
             break;
         default:
             break;
         }
     } while (painel != 0);
 
+    cout << "Fim." << endl;
 
     return 0;
 }

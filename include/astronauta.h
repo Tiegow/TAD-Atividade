@@ -2,6 +2,7 @@
 #define ASTRONAUTA_H
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class astronauta
@@ -12,6 +13,8 @@ class astronauta
         string disp;
         int idade;      
     public:
+        vector<int> historico_voos;
+
         astronauta(string cpf, string nome, int idade);
         astronauta();
         ~astronauta();
