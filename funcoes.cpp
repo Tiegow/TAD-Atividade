@@ -10,9 +10,8 @@ void cadastrar_astronauta(vector<astronauta> &lista)
 
     cout << "Nome: ";   cin >> nome;
     cout << "CPF: " ;   cin >> cpf;
-    cout << "Idade: ";  cin >> idade;
 
-        for(int i = 0; i < lista.size(); i++)
+    for(int i = 0; i < lista.size(); i++)
     {
         if(lista.at(i).getCPF() == cpf)
         {
@@ -21,6 +20,7 @@ void cadastrar_astronauta(vector<astronauta> &lista)
         }
     }
 
+    cout << "Idade: ";  cin >> idade;
     lista.push_back(astronauta(cpf, nome, idade));
 
     cout << "Astronauta " << nome << " cadastrado." << endl;
