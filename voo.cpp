@@ -3,15 +3,13 @@
 voo::voo(int cod)
 {
     codigo = cod;
-    lista_passageiros.clear();
-    situacao = "plan";
+    situacao = "planejamento";
 }
 
 voo::voo()
 {
     codigo = 0;
-    lista_passageiros.clear();
-    situacao = "plan";
+    situacao = "planejamento";
 }
 
 voo::~voo()
@@ -51,7 +49,7 @@ void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
                     return;
                 }
             }
-
+            
             lista_passageiros.push_back(&lista_astros.at(i)); //Adiciona passageiro
             cout << "Astronauta " << lista_astros.at(i).getNome() << " adicionado ao voo " << codigo << endl;
             return;
@@ -83,7 +81,7 @@ void voo::lancar()
         cout << "O voo precisa ter pelo menos um passageiro cadastrado." << endl;
         return;
     }
-    if(situacao != "plan")
+    if(situacao != "planejamento")
     {
         cout << "O voo nao esta em planejamento." << endl;
         return;

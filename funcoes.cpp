@@ -12,7 +12,7 @@ void cadastrar_astronauta(vector<astronauta> &lista)
     cout << "CPF: " ;   cin >> cpf;
     cout << "Idade: ";  cin >> idade;
 
-        for(int i = 0; i < lista.size(); i++)
+    for(int i = 0; i < lista.size(); i++)
     {
         if(lista.at(i).getCPF() == cpf)
         {
@@ -69,7 +69,7 @@ void voo_addAstro(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
     {
         if(meus_voos.at(i).getCod() == codigo)
         {
-            if(meus_voos.at(i).getSit() == "plan")
+            if(meus_voos.at(i).getSit() == "planejamento")
             {
                 cout << "CPF do astronauta: " << endl;
                 cin >> cpf;
@@ -111,13 +111,12 @@ void voo_remAstro(vector<voo> &meus_voos)
                 cout << "O voo nao tem passageiros para remover." << endl;
                 return;
             }
-            if(meus_voos.at(i).getSit() == "plan")
+            if(meus_voos.at(i).getSit() == "planejamento")
             {
                 cout << "CPF do astronauta: " << endl;
                 cin >> cpf;
 
                 meus_voos.at(i).rem_astronauta(cpf);
-                cout << "Astronauta removido." << endl;
             }
             else
             {
@@ -210,17 +209,49 @@ void listar_voos(vector<voo> &meus_voos)
         return;
     }
 
+    cout << "Voos em planejamento:" << endl;
     for(int i = 0; i < meus_voos.size(); i++)
     {
-        cout << "Voo " << meus_voos.at(i).getCod() << ":" << endl;
-
-        cout << " - Passageiros:" << endl;
-        for(int j = 0; j < meus_voos.at(i).lista_passageiros.size(); j++)
+        if(meus_voos.at(i).getSit() == "planejamento")
         {
-            cout << "   Astronauta " << meus_voos.at(i).lista_passageiros[j]->getNome() << endl;
+            cout << " Voo" << meus_voos.at(i).getCod() << endl;
+            cout << " - Passageiros:" << endl;
+            for(int j = 0; j < meus_voos.at(i).lista_passageiros.size(); j++)
+            {
+                cout << "   Astronauta " << meus_voos.at(i).lista_passageiros[j]->getNome() << endl;
+            }
         }
-        cout << " - Situacao: " << meus_voos.at(i).getSit() << endl;
     }
+
+    cout << "Voos em curso:" << endl;
+    for(int i = 0; i < meus_voos.size(); i++)
+    {
+        if(meus_voos.at(i).getSit() == "curso")
+        {
+            cout << " Voo" << meus_voos.at(i).getCod() << endl;
+            cout << " - Passageiros:" << endl;
+            for(int j = 0; j < meus_voos.at(i).lista_passageiros.size(); j++)
+            {
+                cout << "   Astronauta " << meus_voos.at(i).lista_passageiros[j]->getNome() << endl;
+            }
+        }
+    }
+
+    cout << "Voos finalizados:" << endl;
+    for(int i = 0; i < meus_voos.size(); i++)
+    {
+        if(meus_voos.at(i).getSit() == "finalizado" || meus_voos.at(i).getSit() == "destruido")
+        {
+            cout << " Voo" << meus_voos.at(i).getCod() << endl;
+            cout << " - Passageiros:" << endl;
+            for(int j = 0; j < meus_voos.at(i).lista_passageiros.size(); j++)
+            {
+                cout << "   Astronauta " << meus_voos.at(i).lista_passageiros[j]->getNome() << endl;
+            }
+        }
+        if(meus_voos.at(i).getSit() == "finalizado") cout << " * Finalizado com sucesso" << endl;
+        else if(meus_voos.at(i).getSit() == "destruido") cout << " * Finalizado sem sucesso" << endl;
+    }   
 }
 
 void listar_mortos(vector<astronauta*> &R_I_P)
@@ -236,7 +267,7 @@ void listar_mortos(vector<astronauta*> &R_I_P)
     {
         cout << R_I_P.at(i)->getNome() << ":" << endl;
         cout << "- CPF: " << R_I_P.at(i)->getCPF() << endl;
-        cout << "- DISP: " << R_I_P.at(i)->getDisp() << endl;
+        cout << "- Nome: " << R_I_P.at(i)->getNome() << endl;
         cout << "- Historico de voos: " << endl;
 
         for(int v = 0; v < R_I_P.at(i)->historico_voos.size(); v++)
