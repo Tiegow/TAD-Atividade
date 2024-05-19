@@ -3,15 +3,13 @@
 voo::voo(int cod)
 {
     codigo = cod;
-    lista_passageiros.clear();
-    situacao = "plan";
+    situacao = "planejamento";
 }
 
 voo::voo()
 {
     codigo = 0;
-    lista_passageiros.clear();
-    situacao = "plan";
+    situacao = "planejamento";
 }
 
 voo::~voo()
@@ -34,19 +32,6 @@ void voo::setSit(string sit)
 
 void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
 {
-<<<<<<< Updated upstream
-    int index_passageiro = -1;
-
-    for(int i = 0; i < lista_astros.size(); i++) //Verifica qual o passageiro que quer cadastrar
-    {
-        if(lista_astros.at(i).getCPF() == cpf) index_passageiro = i;
-    }
-    if(index_passageiro == -1)
-    {
-        cout << "Astronauta nao encontrado." << endl;
-        return;
-    }
-=======
     for(int i = 0; i < lista_astros.size(); i++) //Procura qual o passageiro que quer cadastrar
     {
         if(lista_astros.at(i).getCPF() == cpf)
@@ -64,19 +49,13 @@ void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
                     return;
                 }
             }
->>>>>>> Stashed changes
-
-    for(int j = 0; j < lista_passageiros.size(); j++) //Verifica se o passageiro ja esta no voo
-    {
-        if(lista_passageiros.at(j)->getCPF() == lista_astros.at(index_passageiro).getCPF())
-        {
-            cout << "Passageiro ja cadastrado no voo." << endl;
+            
+            lista_passageiros.push_back(&lista_astros.at(i)); //Adiciona passageiro
+            cout << "Astronauta " << lista_astros.at(i).getNome() << " adicionado ao voo " << codigo << endl;
             return;
         }
     }
-
-    lista_passageiros.push_back(&lista_astros.at(index_passageiro)); //Adiciona passageiro
-    cout << "Astronauta " << lista_astros.at(index_passageiro).getNome() << " adicionado ao voo " << codigo << endl;
+    cout << "Astronauta nao encontrado." << endl;
 }
 
 void voo::rem_astronauta(string cpf)
@@ -92,4 +71,65 @@ void voo::rem_astronauta(string cpf)
         }
     }
     cout << "O astronauta nao esta cadastrado no voo" << endl;
+}
+
+void voo::lancar()
+{
+    if(lista_passageiros.empty())
+    {
+        cout << "O voo precisa ter pelo menos um passageiro cadastrado." << endl;
+        return;
+    }
+    if(situacao != "planejamento")
+    {
+        cout << "O voo nao esta em planejamento." << endl;
+        return;
+    }
+
+    for(int i_pasg = 0; i_pasg < lista_passageiros.size(); i_pasg++)
+    {
+        if(lista_passageiros[i_pasg]->getDisp() != "disp")
+        {
+            cout << "O astronauta " << lista_passageiros[i_pasg]->getNome() << " nao esta disponivel para decolar." << endl;
+            return;
+        }
+        
+        lista_passageiros[i_pasg]->setDisp("ndisp");
+        lista_passageiros[i_pasg]->historico_voos.push_back(codigo); //Registra o codigo do voo no historico do passageiro
+    }
+    situacao = "curso";
+    cout << "Voo lancado!" << endl;
+}
+
+void voo::explodir(vector<astronauta*> &R_I_P)
+{
+    if(situacao != "curso") //Voo so pode ser destruido em curso
+    {
+        cout << "O voo nao esta em curso. Encerrando sequencia de explosao" << endl;
+        return;
+    }
+
+    for(int i_pasg = 0; i_pasg < lista_passageiros.size(); i_pasg++) //Altera o estado dos passageiros no voo
+    {
+        lista_passageiros[i_pasg]->setDisp("pndisp");
+        R_I_P.push_back(lista_passageiros[i_pasg]);
+    }   
+    situacao = "destruido"; //Altera o estado do voo
+    cout << "Voo destruido!" << endl;
+}
+
+void voo::finalizar()
+{
+    if(situacao != "curso") //Voo so pode ser finalizado se estiver em curso
+    {
+        cout << "O voo nao esta em curso." << endl;
+        return;
+    }
+
+    for(int i_pasg = 0; i_pasg < lista_passageiros.size(); i_pasg++) //Altera o estado dos passageiros no voo
+    {
+        lista_passageiros[i_pasg]->setDisp("disp");
+    }   
+    situacao = "finalizado"; //Altera o estado do voo
+    cout << "Voo finalizado." << endl;
 }

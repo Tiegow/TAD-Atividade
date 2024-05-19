@@ -11,8 +11,8 @@ int main()
 
     do
     {
-        cout << endl << "X**  Sistema de gestao de voos da Safe Travels Spacelines  **X" << endl;
-        cout << endl << "Selecione uma das opcoes a seguir:" << endl;
+        cout << "X**  Sistema de gestao de voos da Safe Travels Spacelines  **X" << endl;
+        cout << "Selecione uma das opcoes a seguir:" << endl;
         cout << "   |1 - Cadastrar astronauta" << endl;
         cout << "   |2 - Cadastrar voo" << endl;
         cout << "   |3 - Adicionar astronauta em voo" << endl;
@@ -59,6 +59,7 @@ int main()
         }
     } while (painel != 0);
 
+    cout << "Fim." << endl;
 
     return 0;
 }
