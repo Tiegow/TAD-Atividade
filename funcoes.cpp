@@ -11,7 +11,7 @@ void cadastrar_astronauta(vector<astronauta> &lista)
     cout << "Nome: ";   cin >> nome;
     cout << "CPF: " ;   cin >> cpf;
 
-    for(int i = 0; i < lista.size(); i++)
+    for(int i = 0; i < lista.size(); i++) //Verifica se o cpf ja foi cadastrado na lista de astronautas
     {
         if(lista.at(i).getCPF() == cpf)
         {
@@ -21,7 +21,7 @@ void cadastrar_astronauta(vector<astronauta> &lista)
     }
 
     cout << "Idade: ";  cin >> idade;
-    lista.push_back(astronauta(cpf, nome, idade));
+    lista.push_back(astronauta(cpf, nome, idade)); //Adiciona na lista uma instância da classe astronauta com os atributos informados
 
     cout << "Astronauta " << nome << " cadastrado." << endl;
 }
@@ -35,7 +35,7 @@ void cadastrar_voo(vector<voo> &lista)
     cout << "Codigo de voo: " << endl;
     cin >> codigo;
 
-    for(int i = 0; i < lista.size(); i++)
+    for(int i = 0; i < lista.size(); i++) //Verifica se o codigo de voo ja foi cadastrado na lista de voos
     {
         if(lista.at(i).getCod() == codigo)
         {
@@ -51,9 +51,15 @@ void cadastrar_voo(vector<voo> &lista)
 
 void voo_addAstro(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
 {
-    if(meus_voos.empty() || meus_astronautas.empty())
+    if(meus_voos.empty())
     {
-        cout << "Nao existem voos ou astronautas cadastrados." << endl;
+        cout << "Nao existem voos cadastrados." << endl;
+        return;
+    }
+
+    if(meus_astronautas.empty())
+    {
+        cout << "Nao existem astronautas cadastrados." << endl;
         return;
     }
 
@@ -69,12 +75,12 @@ void voo_addAstro(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
     {
         if(meus_voos.at(i).getCod() == codigo)
         {
-            if(meus_voos.at(i).getSit() == "planejamento")
+            if(meus_voos.at(i).getSit() == "planejamento") //A lista de passageiros so pode ser alterada se o voo estiver em planejamento
             {
                 cout << "CPF do astronauta: " << endl;
                 cin >> cpf;
 
-                meus_voos.at(i).add_astronauta(cpf, meus_astronautas);
+                meus_voos.at(i).add_astronauta(cpf, meus_astronautas); //Método de voo para adicionar astronauta
             }
             else
             {
@@ -116,7 +122,7 @@ void voo_remAstro(vector<voo> &meus_voos)
                 cout << "CPF do astronauta: " << endl;
                 cin >> cpf;
 
-                meus_voos.at(i).rem_astronauta(cpf);
+                meus_voos.at(i).rem_astronauta(cpf); //Método de voo para remover astronauta
             }
             else
             {
@@ -146,7 +152,7 @@ void voo_lancar(vector<voo> &meus_voos)
     {
         if(meus_voos.at(i).getCod() == codigo)
         {
-            meus_voos.at(i).lancar();
+            meus_voos.at(i).lancar(); //Método de voo para lançar
             return;
         }
     }
@@ -194,7 +200,7 @@ void voo_fim(vector<voo> &meus_voos)
     {
         if(meus_voos.at(i_voo).getCod() == codigo)
         {
-            meus_voos.at(i_voo).finalizar();
+            meus_voos.at(i_voo).finalizar(); //Método para finalizar o voo
             return;
         }
     }
@@ -267,7 +273,6 @@ void listar_mortos(vector<astronauta*> &R_I_P)
     {
         cout << R_I_P.at(i)->getNome() << ":" << endl;
         cout << "- CPF: " << R_I_P.at(i)->getCPF() << endl;
-        cout << "- Nome: " << R_I_P.at(i)->getNome() << endl;
         cout << "- Historico de voos: " << endl;
 
         for(int v = 0; v < R_I_P.at(i)->historico_voos.size(); v++)

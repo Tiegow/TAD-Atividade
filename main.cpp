@@ -1,10 +1,9 @@
-#include "voo.h"
 #include "funcoes.h"
 
 int main()
 {   
     vector<astronauta> meus_astronautas;
-    vector<astronauta*> R_I_P;
+    vector<astronauta*> R_I_P; //Astronautas que não sobreviveram a um voo (voo explodido)
     vector<voo> meus_voos;
 
     int painel;
@@ -25,7 +24,7 @@ int main()
         cout << "   |0 - Fechar painel de controle" << endl;
         cin >> painel;
 
-        switch (painel)
+        switch (painel) //Seleção do painel
         {
         case 1:
             cadastrar_astronauta(meus_astronautas);

@@ -50,7 +50,7 @@ void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
                 }
             }
             
-            lista_passageiros.push_back(&lista_astros.at(i)); //Adiciona passageiro
+            lista_passageiros.push_back(&lista_astros.at(i)); //Adiciona passageiro no voo
             cout << "Astronauta " << lista_astros.at(i).getNome() << " adicionado ao voo " << codigo << endl;
             return;
         }
@@ -60,13 +60,13 @@ void voo::add_astronauta(string cpf, vector<astronauta> &lista_astros)
 
 void voo::rem_astronauta(string cpf)
 {
-    auto j = lista_passageiros.begin();
+    auto j = lista_passageiros.begin(); //Iterador para o vector lista_passageiros
 
     for(j; j != lista_passageiros.end(); j++)
     {
         if((*j)->getCPF() == cpf)
         {
-            lista_passageiros.erase(j);
+            lista_passageiros.erase(j); //Remove
             return;
         }
     }
@@ -86,18 +86,22 @@ void voo::lancar()
         return;
     }
 
-    for(int i_pasg = 0; i_pasg < lista_passageiros.size(); i_pasg++)
+    for(int i_pasg = 0; i_pasg < lista_passageiros.size(); i_pasg++) //Verificar a disponibilidade de todos os passageiros cadastrados
     {
-        if(lista_passageiros[i_pasg]->getDisp() != "disp")
+        if(lista_passageiros.at(i_pasg)->getDisp() != "disp") //Voo só pode ser lançado se todos os passageiros estão disponiveis
         {
-            cout << "O astronauta " << lista_passageiros[i_pasg]->getNome() << " nao esta disponivel para decolar." << endl;
+            cout << "O astronauta " << lista_passageiros.at(i_pasg)->getNome() << " nao esta disponivel para decolar." << endl;
             return;
         }
-        
-        lista_passageiros[i_pasg]->setDisp("ndisp");
-        lista_passageiros[i_pasg]->historico_voos.push_back(codigo); //Registra o codigo do voo no historico do passageiro
     }
-    situacao = "curso";
+
+    for(int i_pasg = 0; i_pasg < lista_passageiros.size(); i_pasg++)
+    {
+        lista_passageiros.at(i_pasg)->setDisp("ndisp"); //Atualiza a disponibilidade do passageiro
+        lista_passageiros.at(i_pasg)->historico_voos.push_back(codigo); //Registra o codigo do voo no historico do passageiro
+    }
+
+    situacao = "curso"; //Atualiza a situação do voo
     cout << "Voo lancado!" << endl;
 }
 
