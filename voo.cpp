@@ -66,6 +66,7 @@ void voo::rem_astronauta(string cpf)
     {
         if((*j)->getCPF() == cpf)
         {
+            cout << "Astronauta " << (*j)->getNome() << " removido" << endl;
             lista_passageiros.erase(j); //Remove
             return;
         }

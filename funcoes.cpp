@@ -6,7 +6,7 @@ void cadastrar_astronauta(vector<astronauta> &lista)
     string cpf;
     int idade;
 
-    cout << "Cadastrando astronauta" << endl;
+    cout << "-> Cadastrando astronauta..." << endl;
 
     cout << "Nome: ";   cin >> nome;
     cout << "CPF: " ;   cin >> cpf;
@@ -30,7 +30,7 @@ void cadastrar_voo(vector<voo> &lista)
 {
     int codigo;
 
-    cout << "Cadastrando voo" << endl;
+    cout << "-> Cadastrando voo..." << endl;
 
     cout << "Codigo de voo: " << endl;
     cin >> codigo;
@@ -66,7 +66,7 @@ void voo_addAstro(vector<voo> &meus_voos, vector<astronauta> &meus_astronautas)
     int codigo;
     string cpf;
 
-    cout << "Adicionando astronauta em voo" << endl;
+    cout << "-> Adicionando astronauta em voo..." << endl;
 
     cout << "Codigo do voo: " << endl;
     cin >> codigo;
@@ -103,7 +103,7 @@ void voo_remAstro(vector<voo> &meus_voos)
     int codigo;
     string cpf;
 
-    cout << "Removendo astronauta do voo" << endl;
+    cout << "-> Removendo astronauta do voo..." << endl;
 
     cout << "Codigo do voo: " << endl;
     cin >> codigo;
@@ -143,7 +143,7 @@ void voo_lancar(vector<voo> &meus_voos)
     }
 
     int codigo;
-    cout << "Preparacao de lancamento" << endl;
+    cout << "-> Preparacao de lancamento" << endl;
 
     cout << "Codigo do voo: " << endl;
     cin >> codigo;
@@ -168,7 +168,7 @@ void voo_explodir(vector<voo> &meus_voos, vector<astronauta*> &R_I_P)
     }
 
     int codigo;
-    cout << "Iniciando protocolo de explosao" << endl;
+    cout << "-> Iniciando protocolo de explosao..." << endl;
 
     cout << "Codigo do voo: " << endl;
     cin >> codigo;

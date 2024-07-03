@@ -22,6 +22,7 @@ int main()
         cout << "   |8 - Listar voos" << endl;
         cout << "   |9 - Listar fatalidades" << endl;
         cout << "   |0 - Fechar painel de controle" << endl;
+        cout << "Opcao: ";
         cin >> painel;
 
         switch (painel) //Seleção do painel
